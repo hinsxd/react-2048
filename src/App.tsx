@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import * as Styles from './styles';
+import { useBoard } from './useBoard';
+import { Board } from './types';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const App: React.FC<{}> = () => {
+  const { board, score } = useBoard();
 
+  return (
+    <div>
+      <Styles.Board>
+        {board.map((row, rowIdx) =>
+          row.map((cell, colIdx) => (
+            <Styles.Cell
+              key={`${colIdx}${rowIdx}`}
+              rowIdx={rowIdx}
+              colIdx={colIdx}
+              num={cell}
+            >
+              {cell > 0 && cell}
+            </Styles.Cell>
+          ))
+        )}
+      </Styles.Board>
+      {score}
+    </div>
+  );
+};
 export default App;
