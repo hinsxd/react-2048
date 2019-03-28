@@ -110,7 +110,7 @@ export const putRandCell = (board: Board): Board => {
 
   if (randCoord) {
     const [row, col] = randCoord;
-    newBoard[row][col] = _.sample([2, 4]) || 2;
+    newBoard[row][col] = Math.random() < 0.9 ? 2 : 4;
   }
 
   return newBoard;
